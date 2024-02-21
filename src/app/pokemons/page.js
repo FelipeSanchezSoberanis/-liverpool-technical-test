@@ -1,8 +1,9 @@
 "use client";
 
 import { usePokemonPages } from "@/services/pokemon-api";
+import Link from "next/link";
 
-export default function Pokemons() {
+export default function PokemonList() {
   const { data, setSize, isLoading } = usePokemonPages();
 
   return (
@@ -13,7 +14,7 @@ export default function Pokemons() {
         {data &&
           data.map((pokemonPage) =>
             pokemonPage.results.map((pokemon) => (
-              <a
+              <Link
                 href={"/pokemons/" + pokemon.name}
                 className="col-12 col-md-6 col-lg-3 p-1"
                 key={pokemon.name}
@@ -21,7 +22,7 @@ export default function Pokemons() {
                 <div className="card p-3">
                   <h2 className="text-center">{pokemon.name}</h2>
                 </div>
-              </a>
+              </Link>
             ))
           )}
       </div>
