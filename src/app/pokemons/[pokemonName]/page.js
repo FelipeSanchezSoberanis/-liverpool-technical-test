@@ -1,80 +1,92 @@
 "use client";
 
 import { usePokemonDetails } from "@/services/pokemon-api";
-import Link from "next/link";
+import Image from "next/image";
+
+const firstLetterUppercase = (text) => text.charAt(0).toUpperCase() + text.substring(1);
 
 export default function PokemonDetails({ params }) {
   const { data, isLoading } = usePokemonDetails(params.pokemonName);
 
   return (
     <main className="container">
-      <Link href="/pokemons" className="btn btn-primary">
-        Back
-      </Link>
-
-      <h1 className="text-center">{params.pokemonName}</h1>
-
-      <h2 className="text-center">General information</h2>
-
-      {data && (
-        <div className="d-flex w-100 justify-content-center">
-          <div className="card col-12 col-md-5 p-3">
-            <h4 className="text-center">#{data.id}</h4>
-
-            <div className="d-flex justify-content-center">
-              {data.types.map((type) => (
-                <div key={type.type.name} className="card p-1">
-                  {type.type.name}
-                </div>
-              ))}
-            </div>
-
-            <div className="d-flex justify-content-center">
-              <div className="ps-2 pe-2">Height: {data.height}</div>
-              <div className="ps-2 pe-2">Weight: {data.weight}</div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <h2 className="text-center">Sprites</h2>
-
-      <div className="card">
-        <div className="d-flex flex-wrap justify-content-center">
-          {data &&
-            Object.entries(data.sprites)
-              .filter(([key, value]) => key !== "other" && key !== "versions" && value)
-              .map(([key, value]) => <img className="col-6 col-md-auto" key={key} src={value} />)}
-        </div>
-      </div>
-
-      <h2 className="text-center">Stats</h2>
-
-      <div className="d-flex justify-content-center">
-        <div className="card col-12 col-md-5 d-flex flex-wrap row">
-          {data &&
-            data.stats.map((stat) => (
-              <div key={stat.stat.name} className="col-12 text-center">
-                {stat.stat.name}: {stat.base_stat}
-              </div>
-            ))}
-        </div>
-      </div>
-
-      <h2 className="text-center">Cries</h2>
+      <h1 className="text-center">{firstLetterUppercase(params.pokemonName)}</h1>
 
       <div className="row justify-content-center">
-        <div className="row card p-3 col-12 col-md-5">
-          {data &&
-            Object.entries(data.cries).map(([key, value]) => (
-              <div key={key} className="row align-items-center justify-content-center">
-                <div className="col-auto">{key}</div>
-                <audio className="col" controls>
-                  <source src={value} type="audio/ogg" />
-                </audio>
+        {isLoading && (
+          <div
+            className="col-12 col-md-6 placeholder-glow p-0 m-0"
+            style={{ height: 300, width: 300 }}
+          >
+            <span className="placeholder" style={{ height: 300, width: 300 }}></span>
+          </div>
+        )}
+        {data && (
+          <Image
+            className="col-12 col-md-6"
+            src={data.sprites.front_default}
+            width={300}
+            height={300}
+            alt={data.name + " front sprite"}
+            style={{ objectFit: "contain" }}
+          />
+        )}
+      </div>
+
+      <div className="row row-cols-2 row-cols-md-auto gx-0 gx-md-5 gy-3 gy-md-0 justify-content-center">
+        {isLoading &&
+          ["HP", "Type", "Height", "Weight"].map((stat) => (
+            <div key={stat} className="col">
+              <div className="text-center placeholder-glow">
+                <span className="placeholder col-8 col-md-12"></span>
               </div>
-            ))}
-        </div>
+              <div className="text-center fw-light">{stat}</div>
+            </div>
+          ))}
+        {data && (
+          <>
+            <div className="col">
+              <div className="text-center">
+                {data.stats.filter((stat) => stat.stat.name === "hp")[0].base_stat}
+              </div>
+              <div className="text-center fw-light">HP</div>
+            </div>
+            <div className="col">
+              <div className="text-center">
+                {data.types.map((type) => firstLetterUppercase(type.type.name)).join(" / ")}
+              </div>
+              <div className="text-center fw-light">Type</div>
+            </div>
+            <div className="col">
+              <div className="text-center">{data.height / 10} m</div>
+              <div className="text-center fw-light">Height</div>
+            </div>
+            <div className="col">
+              <div className="text-center">{data.weight / 10} kg</div>
+              <div className="text-center fw-light">Weight</div>
+            </div>
+          </>
+        )}
+      </div>
+
+      <h2 className="text-center p-3">Cries</h2>
+
+      <div className="row row-cols-auto justify-content-center gy-3">
+        {isLoading &&
+          [1, 2].map((i) => (
+            <div key={i} className="col placeholder-glow">
+              <span className="placeholder" style={{ height: 54, width: 300 }}></span>
+            </div>
+          ))}
+        {data &&
+          Object.entries(data.cries).map(([name, url]) => (
+            <div key={name} className="col">
+              <audio controls>
+                <source src={url} type="audio/ogg" />
+              </audio>
+              <div className="text-center fw-light">{firstLetterUppercase(name)}</div>
+            </div>
+          ))}
       </div>
     </main>
   );
