@@ -5,7 +5,7 @@ import DynamicInput from "@/components/dynamic-input";
 import { useRef } from "react";
 
 export default function Formulario() {
-  const { data, isLoading } = useDynamicInputs();
+  const { data, error, isLoading } = useDynamicInputs();
   const form = useRef(null);
 
   const handleSubmit = (e) => {
@@ -24,6 +24,16 @@ export default function Formulario() {
     <main className="container">
       <h1 className="text-center p-3">Dynamic inputs</h1>
 
+      {isLoading && (
+        <div className="position-absolute top-0 start-0 w-100 vh-100 d-flex justify-content-center align-items-center">
+          <div className="spinner-border text-primary"></div>
+        </div>
+      )}
+      {error && (
+        <div className="position-absolute top-0 start-0 w-100 vh-100 d-flex justify-content-center align-items-center">
+          <div className="text-danger">Error retrieving data</div>
+        </div>
+      )}
       {data && (
         <form ref={form} noValidate>
           {data.items.map((item) => (
