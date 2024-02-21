@@ -2,9 +2,33 @@
 
 import { usePokemonPages } from "@/services/pokemon-api";
 import Link from "next/link";
+import { useEffect } from "react";
+import { debounce } from "lodash";
 
 export default function PokemonList() {
-  const { data, setSize, isLoading } = usePokemonPages();
+  const { data, setSize } = usePokemonPages();
+
+  const loadNextPageDebounced = debounce(() => setSize((size) => size + 1), 200, {
+    leading: true,
+    trailing: false
+  });
+
+  useEffect(() => {
+    setSize(2);
+
+    const loadNextPageWhenScrollBottom = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      if (scrollTop + clientHeight > scrollHeight * 0.9) loadNextPageDebounced();
+    };
+
+    const wheelEventListener = document.addEventListener("wheel", loadNextPageWhenScrollBottom);
+    const scrollEventListener = document.addEventListener("scroll", loadNextPageWhenScrollBottom);
+
+    return () => {
+      removeEventListener(document, wheelEventListener);
+      removeEventListener(document, scrollEventListener);
+    };
+  }, []);
 
   return (
     <main className="container">
@@ -25,16 +49,6 @@ export default function PokemonList() {
               </Link>
             ))
           )}
-      </div>
-
-      <div className="d-flex w-100 justify-content-center p-2">
-        <button
-          className="btn btn-primary "
-          disabled={isLoading}
-          onClick={() => setSize((size) => size + 1)}
-        >
-          Next
-        </button>
       </div>
     </main>
   );
