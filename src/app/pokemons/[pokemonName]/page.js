@@ -2,6 +2,7 @@
 
 import { usePokemonDetails } from "@/services/pokemon-api";
 import Image from "next/image";
+import Link from "next/link";
 
 const firstLetterUppercase = (text) => text.charAt(0).toUpperCase() + text.substring(1);
 
@@ -10,6 +11,14 @@ export default function PokemonDetails({ params }) {
 
   return (
     <main className="container">
+      <div className="row pt-3">
+        <div className="col-auto">
+          <Link href="/pokemons" className="btn btn-primary">
+            {"< Go back"}
+          </Link>
+        </div>
+      </div>
+
       <h1 className="text-center">{firstLetterUppercase(params.pokemonName)}</h1>
 
       <div className="row justify-content-center">

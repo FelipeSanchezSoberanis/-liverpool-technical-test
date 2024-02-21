@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
-    <SWRConfig value={{ provider: () => new Map(), dedupingInterval: 30_000 }}>
+    <SWRConfig value={{ provider: () => new Map() }}>
       <html lang="en">
         <body className={inter.className}>{children}</body>
       </html>
