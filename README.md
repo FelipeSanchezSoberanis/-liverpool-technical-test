@@ -1,40 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Content
 
-## Getting Started
+<!-- vim-markdown-toc Marked -->
 
-First, run the development server:
+* [How to run in local environment](#how-to-run-in-local-environment)
+* [Visit deploy](#visit-deploy)
+* [Developer documentation](#developer-documentation)
+    * [Repo folder organization](#repo-folder-organization)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<!-- vim-markdown-toc -->
+
+# How to run in local environment
+
+1. Install `node` 20.x from [node](https://nodejs.org/)
+2. Run `npm i` to install all dependencies
+3. Run `npm run dev` to run app in development mode
+4. Visit http://localhost:3000/ to access development build
+
+# Visit deploy
+
+1. Navigate to https://tech-test.felipe-sanchez.space/login to use the deployed production build
+
+# Developer documentation
+
+## Repo folder organization
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-
-
+├── public                    - Files public to anyone
+└── src                       - Application code
+    ├── app                   - View components. The route of the view is the path to the component relative to this folder
+    │   ├── auth
+    │   │   └── login         - View in charge of handling login callback from OAuth
+    │   ├── formulario        - View in charge of demonstrating the dynamic input generation from API endpoint
+    │   ├── login             - View in charge of showing login option
+    │   └── pokemons          - View in charge of showing all pokemons in an infinite list
+    │       └── [pokemonName] - View in charge of showing a pokemon's details
+    ├── components            - Independent components used in the app
+    ├── services              - API services
+    └── stores                - State management with redux
+```
 
