@@ -1,15 +1,20 @@
 "use client";
 
+import { reset } from "@/stores/auth-slice";
 import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Navbar() {
   const { logout } = useAuth0();
   const router = useRouter();
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     await logout({ openUrl: false });
+    dispatch(reset());
     router.push("/login");
   };
 
@@ -56,7 +61,7 @@ export default function Navbar() {
               </Link>
               <ul className="dropdown-menu end-0" style={{ left: "auto" }}>
                 <li>
-                  <div className="dropdown-item">Felipe Sánchez Soberanis</div>
+                  <div className="dropdown-item">{auth.name}</div>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
