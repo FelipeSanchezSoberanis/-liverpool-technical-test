@@ -38,4 +38,4 @@ jobs:
           host: 13.59.58.129
           username: ubuntu
           key: "${{ secrets.TEST_SERVER_SSH_KEY }}"
-          script: sudo systemctl restart app.service
+          script: sudo systemctl restart liverpool-technical-test.service
