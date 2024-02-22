@@ -10,10 +10,10 @@ export default function Formulario() {
   const form = useRef(null);
 
   const handleSubmit = (e) => {
-    if (!form.current.checkValidity()) {
-      e.preventDefault();
-      e.stopPropagation();
-    } else {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (form.current.checkValidity()) {
       const formData = new FormData(form.current);
       formData.forEach((value, name) => console.log({ name, value }));
     }
