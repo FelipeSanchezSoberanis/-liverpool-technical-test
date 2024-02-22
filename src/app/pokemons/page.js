@@ -10,20 +10,23 @@ export default function PokemonList() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data, setSize } = usePokemonPages();
-  const { data: pokemonDetails } = usePokemonDetails(searchTerm);
+  const {
+    data: foundPokemon,
+    error: errorFindingPokemon,
+    isLoading: findingPokemon
+  } = usePokemonDetails(searchTerm);
 
-  const pokemonFound = pokemonDetails && searchTermUi && searchTermUi === pokemonDetails.name;
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(searchTermUi);
+  };
+
+  useEffect(() => setSearchTerm(""), [searchTermUi]);
 
   const loadNextPageDebounced = debounce(() => setSize((size) => size + 1), 200, {
     leading: true,
     trailing: false
   });
-
-  useEffect(() => {
-    if (!searchTermUi || !searchTermUi.length) return;
-    const timeout = setTimeout(() => setSearchTerm(searchTermUi), 500);
-    return () => clearTimeout(timeout);
-  }, [searchTermUi]);
 
   useEffect(() => {
     setSize(2);
@@ -44,10 +47,10 @@ export default function PokemonList() {
 
   return (
     <main className="container">
-      <h1 className="text-center p-2">Pokemons</h1>
+      <h1 className="text-center pt-4 pb-2">Pokemons</h1>
 
-      <div className="row justify-content-center">
-        <div className="col-12, col-md-5">
+      <form onSubmit={handleSearch} className="row justify-content-center pt-2 pb-2">
+        <div className="col col-md-6 col-lg-3">
           <input
             value={searchTermUi}
             onChange={(e) => setSearchTermUi(e.target.value)}
@@ -55,32 +58,47 @@ export default function PokemonList() {
             className="form-control"
           />
         </div>
-      </div>
+        <div className="col-auto">
+          <button style={{ width: 80.97 }} type="submit" className="btn btn-primary">
+            {findingPokemon ? (
+              <div className="spinner-border spinner-border-sm text-white"></div>
+            ) : (
+              "Search"
+            )}
+          </button>
+        </div>
+      </form>
 
-      <div className="d-flex flex-wrap pt-2 pb-2">
-        {pokemonFound && (
-          <Link href={"/pokemons/" + pokemonDetails.name} className="col-12 col-md-6 col-lg-3 p-1">
+      {foundPokemon && (
+        <div className="row justify-content-center">
+          <Link className="col-3" href={"/pokemons/" + foundPokemon.name}>
             <div className="card p-3">
-              <h2 className="text-center">{pokemonDetails.name}</h2>
+              <h2 className="text-center">{foundPokemon.name}</h2>
             </div>
           </Link>
-        )}
-        {!pokemonFound &&
-          data &&
-          data.map((pokemonPage) =>
-            pokemonPage.results.map((pokemon) => (
-              <Link
-                href={"/pokemons/" + pokemon.name}
-                className="col-12 col-md-6 col-lg-3 p-1"
-                key={pokemon.name}
-              >
-                <div className="card p-3">
-                  <h2 className="text-center">{pokemon.name}</h2>
-                </div>
-              </Link>
-            ))
-          )}
-      </div>
+        </div>
+      )}
+      {errorFindingPokemon && (
+        <div className="row justify-content-center">
+          <div className="col-3 card p-3">
+            <h2 className="text-center">Pokemon not found</h2>
+          </div>
+        </div>
+      )}
+      {!foundPokemon && !errorFindingPokemon && (
+        <div className="row flex-wrap row-cols-1 row-cols-md-2 row-cols-lg-4">
+          {data &&
+            data.map((pokemonPage) =>
+              pokemonPage.results.map((pokemon) => (
+                <Link href={"/pokemons/" + pokemon.name} className="p-1" key={pokemon.name}>
+                  <div className="card p-3">
+                    <h2 className="text-center">{pokemon.name}</h2>
+                  </div>
+                </Link>
+              ))
+            )}
+        </div>
+      )}
     </main>
   );
 }
