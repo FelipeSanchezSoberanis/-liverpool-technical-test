@@ -3,13 +3,14 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { useEffect } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function AuthCallbackLogin() {
   const { isLoading, isAuthenticated } = useAuth0();
+  const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated) redirect("/pokemons");
+    if (!isLoading && isAuthenticated) router.push("/pokemons");
   }, [isLoading, isAuthenticated]);
 
   return (

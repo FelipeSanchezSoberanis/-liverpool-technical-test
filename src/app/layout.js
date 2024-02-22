@@ -5,8 +5,13 @@ import "./globals.css";
 
 import { SWRConfig } from "swr";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   return (
     <Auth0Provider
       domain="dev-xjgkgbbbpbo086ch.us.auth0.com"
