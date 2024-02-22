@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 import { setName } from "@/stores/auth-slice";
 
 export default function RootLayout({ children }) {
+  const redirect_uri = process.env.NEXT_PUBLIC_SUCCESSFUL_LOGIN_REDIRECT_URI;
+
   useEffect(() => {
     require("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
@@ -23,7 +25,7 @@ export default function RootLayout({ children }) {
       <Auth0Provider
         domain="dev-xjgkgbbbpbo086ch.us.auth0.com"
         clientId="5AYBJcopjb0AOkKT7jAZu90rdrpmFATd"
-        authorizationParams={{ redirect_uri: "http://localhost:3000/auth-callback/login" }}
+        authorizationParams={{ redirect_uri }}
       >
         <SWRConfig value={{ provider: () => new Map() }}>
           <App children={children} />
