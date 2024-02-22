@@ -21,7 +21,9 @@ export function usePokemonPages() {
 
 export function usePokemonDetails(pokemonName) {
   const { data, error, isLoading } = useSWRImmutable(
-    pokemonName.trim().length > 0 ? `${BASE_URL}/pokemon/${pokemonName}` : null,
+    pokemonName.trim().length > 0
+      ? `${BASE_URL}/pokemon/${pokemonName.trim().toLowerCase()}`
+      : null,
     jsonFetcher
   );
   return { data, error, isLoading };
