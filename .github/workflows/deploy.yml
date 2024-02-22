@@ -1,1 +1,41 @@
-
+name: Build and deploy to server
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - name: Build
+        run: |
+          npm ci 
+          npm run build
+      - name: Upload dist dir to server
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avzr --delete
+          path: .
+          remote_path: /home/ubuntu/app
+          remote_host: 13.59.58.129
+          remote_user: ubuntu
+          remote_key: "${{ secrets.TEST_SERVER_SSH_KEY }}"
+      - name: Restart website service
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 13.59.58.129
+          username: ubuntu
+          key: "${{ secrets.TEST_SERVER_SSH_KEY }}"
+          script: sudo systemctl restart app.service
