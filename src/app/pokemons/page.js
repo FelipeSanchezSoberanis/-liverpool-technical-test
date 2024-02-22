@@ -63,11 +63,13 @@ export default function PokemonList() {
             />
           </div>
           <div className="col-auto">
-            <button style={{ width: 80.97 }} type="submit" className="btn btn-primary">
+            <button style={{ width: 107 }} type="submit" className="btn btn-primary">
               {findingPokemon ? (
                 <div className="spinner-border spinner-border-sm text-white"></div>
               ) : (
-                "Search"
+                <>
+                  <i className="bi bi-search pe-1"></i> Search
+                </>
               )}
             </button>
           </div>

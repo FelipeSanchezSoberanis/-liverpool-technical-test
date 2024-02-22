@@ -51,13 +51,13 @@ export default function Navbar() {
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
               <Link
-                className="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle p-0"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown link
+                <i className="bi bi-person-circle fs-2"></i>
               </Link>
               <ul className="dropdown-menu end-0" style={{ left: "auto" }}>
                 <li>
