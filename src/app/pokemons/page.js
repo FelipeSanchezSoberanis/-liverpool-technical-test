@@ -74,8 +74,8 @@ export default function PokemonList() {
         </form>
 
         {foundPokemon && (
-          <div className="row justify-content-center">
-            <Link className="col-3" href={"/pokemons/" + foundPokemon.name}>
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center">
+            <Link className="col" href={"/pokemons/" + foundPokemon.name}>
               <div className="card p-3">
                 <h2 className="text-center">{foundPokemon.name}</h2>
               </div>
@@ -83,9 +83,9 @@ export default function PokemonList() {
           </div>
         )}
         {errorFindingPokemon && (
-          <div className="row justify-content-center">
-            <div className="col-3 card p-3">
-              <h2 className="text-center">Pokemon not found</h2>
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center">
+            <div className="col card p-3">
+              <h2 className="text-center">Pokemon "{searchTerm}" not found</h2>
             </div>
           </div>
         )}
