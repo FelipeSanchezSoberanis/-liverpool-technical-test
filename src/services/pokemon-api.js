@@ -20,6 +20,10 @@ export function usePokemonPages() {
 }
 
 export function usePokemonDetails(pokemonName) {
-  const { data, isLoading } = useSWRImmutable(`${BASE_URL}/pokemon/${pokemonName}`, jsonFetcher);
-  return { data, isLoading };
+  const { data, error, isLoading, mutate } = useSWRImmutable(
+    () =>
+      pokemonName && pokemonName.trim().length > 0 ? `${BASE_URL}/pokemon/${pokemonName}` : null,
+    jsonFetcher
+  );
+  return { data, error, isLoading, mutate };
 }
