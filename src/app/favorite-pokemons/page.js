@@ -37,7 +37,7 @@ export default function FavoritePokemons() {
           {Object.entries(favorites)
             .filter(([favorite]) => favorite.includes(filter.trim().toLowerCase()))
             .map(([favorite]) => (
-              <PokemonCard pokemon={{ name: favorite }} />
+              <PokemonCard key={favorite} pokemon={{ name: favorite }} />
             ))}
         </div>
       </main>

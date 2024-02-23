@@ -10,11 +10,9 @@ export const favoritesSlice = createSlice({
   reducers: {
     addFavorite: (state, action) => {
       state.favorites[action.payload] = true;
-      localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
     removeFavorite: (state, action) => {
       delete state.favorites[action.payload];
-      localStorage.setItem("favorites", JSON.stringify(state.favorites));
     }
   }
 });
