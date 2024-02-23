@@ -5,6 +5,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+/**
+ * @file View in charge of handling login callback from OAuth.
+ */
 export default function AuthCallbackLogin() {
   const { isLoading, isAuthenticated } = useAuth0();
   const router = useRouter();

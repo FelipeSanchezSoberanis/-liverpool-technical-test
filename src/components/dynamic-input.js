@@ -1,3 +1,18 @@
+/**
+ * @file Component in charge of creating an input from the information given.
+ *
+ * @typedef {Object} DynamicInputData
+ * @property {String} id               - Attribute id of the input.
+ * @property {String} name             - Attribute name of the input.
+ * @property {String} description      - Description shown in the ui for the input, commonly, in a label tag.
+ * @property {Boolean} mandatory       - Defines if the input has to be marked as required.
+ * @property {String[]} acceptedValues - Values used for selects or radio buttons.
+ * @property {String} defaultValue     - Default value for the input.
+ * @property {String} type             - Type of the input.
+ *
+ * @param {Object} props                - Component props.
+ * @param {DynamicInputData} props.item - Information used to create the input.
+ */
 export default function DynamicInput({ item }) {
   switch (item.type.trim().toLowerCase()) {
     case "boolean":

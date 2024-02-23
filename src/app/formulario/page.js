@@ -5,6 +5,9 @@ import DynamicInput from "@/components/dynamic-input";
 import { useRef } from "react";
 import Navbar from "@/components/navbar";
 
+/**
+ * @file View in charge of demonstrating the dynamic input generation from API endpoint.
+ */
 export default function Formulario() {
   const { data, error, isLoading } = useDynamicInputs();
   const form = useRef(null);

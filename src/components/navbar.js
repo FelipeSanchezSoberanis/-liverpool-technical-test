@@ -6,6 +6,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 
+/**
+ * @file Component containing the navbar of the application.
+ */
 export default function Navbar() {
   const { logout } = useAuth0();
   const router = useRouter();

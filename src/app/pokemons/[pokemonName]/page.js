@@ -7,6 +7,9 @@ import Navbar from "@/components/navbar";
 
 const firstLetterUppercase = (text) => text.charAt(0).toUpperCase() + text.substring(1);
 
+/**
+ * @file View in charge of showing a pokemon's details.
+ */
 export default function PokemonDetails({ params }) {
   const { data, isLoading } = usePokemonDetails(params.pokemonName);
 

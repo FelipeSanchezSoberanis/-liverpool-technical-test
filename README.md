@@ -28,10 +28,11 @@
 ├── public                    - Files public to anyone
 └── src                       - Application code
     ├── app                   - View components. The route of the view is the path to the component relative to this folder
-    │   ├── auth
+    │   ├── auth-callback
     │   │   └── login         - View in charge of handling login callback from OAuth
+    │   ├── favorite-pokemons - View in charge of displaying pokemons marked as favorites
     │   ├── formulario        - View in charge of demonstrating the dynamic input generation from API endpoint
-    │   ├── login             - View in charge of showing login option
+    │   ├── login             - View in charge of showing login button
     │   └── pokemons          - View in charge of showing all pokemons in an infinite list
     │       └── [pokemonName] - View in charge of showing a pokemon's details
     ├── components            - Independent components used in the app

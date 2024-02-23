@@ -1,8 +1,19 @@
+/**
+ * @file Component in charge of creating a pokemon card from the information given.
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "@/stores/favorites-slice";
 
+/**
+ * @typedef {Object} PokemonListItem - Pokemon's summarized information
+ * @property {String} name - Pokemon's name
+ *
+ * @param {Object} props                  - Component props.
+ * @param {PokemonListItem} props.pokemon - Information used to create the pokemon card.
+ */
 export default function PokemonCard({ pokemon }) {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites.favorites);

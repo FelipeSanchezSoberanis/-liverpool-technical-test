@@ -7,6 +7,9 @@ import { debounce } from "lodash";
 import Navbar from "@/components/navbar";
 import PokemonCard from "@/components/pokemon-card";
 
+/**
+ * @file View in charge of showing all pokemons in an infinite list.
+ */
 export default function PokemonList() {
   const [searchTermUi, setSearchTermUi] = useState("");
   const [searchTerm, setSearchTerm] = useState("");

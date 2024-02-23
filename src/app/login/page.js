@@ -2,6 +2,9 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 
+/**
+ * @file View in charge of showing login button.
+ */
 export default function Login() {
   const { loginWithRedirect } = useAuth0();
 

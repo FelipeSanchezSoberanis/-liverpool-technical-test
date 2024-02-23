@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 import PokemonCard from "@/components/pokemon-card";
 import { useState } from "react";
 
+/**
+ * @file View in charge of displaying pokemons marked as favorites.
+ */
 export default function FavoritePokemons() {
   const [filter, setFilter] = useState("");
 

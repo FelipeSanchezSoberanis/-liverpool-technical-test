@@ -13,6 +13,9 @@ import { useDispatch } from "react-redux";
 import { setName } from "@/stores/auth-slice";
 import { addFavorite } from "@/stores/favorites-slice";
 
+/**
+ * @file Entrypoint of the application.
+ */
 export default function RootLayout({ children }) {
   const redirect_uri = process.env.NEXT_PUBLIC_SUCCESSFUL_LOGIN_REDIRECT_URI;
 
