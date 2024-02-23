@@ -6,7 +6,7 @@ import "./globals.css";
 
 import { SWRConfig } from "swr";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Provider, useSelector } from "react-redux";
 import { store } from "@/stores/store";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -40,9 +40,10 @@ function App({ children }) {
   const { isLoading, isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
   const favorites = useSelector((store) => store.favorites.favorites);
+  const [doneFetchingFavorites, setDoneFetchingFavorites] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    if (doneFetchingFavorites) localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ function App({ children }) {
         dispatch(addFavorite(favorite));
       });
     }
+    setDoneFetchingFavorites(true);
   }, []);
 
   useEffect(() => {
