@@ -77,12 +77,8 @@ export default function PokemonList() {
         </form>
 
         {foundPokemon && (
-          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center">
-            <Link className="col" href={"/pokemons/" + foundPokemon.name}>
-              <div className="card p-3">
-                <h2 className="text-center">{foundPokemon.name}</h2>
-              </div>
-            </Link>
+          <div className="row flex-wrap row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center">
+            <PokemonCard pokemon={foundPokemon} />
           </div>
         )}
         {errorFindingPokemon && (
