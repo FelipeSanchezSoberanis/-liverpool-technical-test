@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite, removeFavorite } from "@/stores/favorites-slice";

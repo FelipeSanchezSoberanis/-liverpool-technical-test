@@ -35,10 +35,27 @@ export default function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" href="/pokemons">
+            <li className="nav-item dropdown">
+              <div
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Pokemons
-              </Link>
+              </div>
+              <ul className="dropdown-menu">
+                <li>
+                  <Link href="pokemons" className="dropdown-item">
+                    All
+                  </Link>
+                </li>
+                <li>
+                  <Link href="favorite-pokemons" className="dropdown-item">
+                    Favorites
+                  </Link>
+                </li>
+              </ul>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/formulario">
@@ -50,15 +67,14 @@ export default function Navbar() {
         <div className="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
-              <Link
+              <div
                 className="nav-link dropdown-toggle p-0"
-                href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 <i className="bi bi-person-circle fs-2"></i>
-              </Link>
+              </div>
               <ul className="dropdown-menu end-0" style={{ left: "auto" }}>
                 <li>
                   <div className="dropdown-item">{auth.name}</div>

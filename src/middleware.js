@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 export function middleware(request) {
   if (
     !request.nextUrl.pathname.startsWith("/pokemons") &&
-    !request.nextUrl.pathname.startsWith("/formulario")
+    !request.nextUrl.pathname.startsWith("/formulario") &&
+    !request.nextUrl.pathname.startsWith("/favorite-pokemons")
   )
     return NextResponse.next();
 
