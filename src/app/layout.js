@@ -1,8 +1,7 @@
 "use client";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./globals.scss";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import "./globals.css";
 
 import { SWRConfig } from "swr";
 import { Auth0Provider } from "@auth0/auth0-react";

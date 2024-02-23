@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-sm bg-body-tertiary">
       <div className="container-fluid">
-        <div className="navbar-brand">Tech test</div>
+        <div className="navbar-brand text-primary">Tech test</div>
         <button
           className="navbar-toggler"
           type="button"
@@ -68,12 +68,12 @@ export default function Navbar() {
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
               <div
-                className="nav-link dropdown-toggle p-0"
+                className="nav-link dropdown-toggle p-0 text-primary"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <i className="bi bi-person-circle fs-2"></i>
+                <i className="bi bi-person-circle fs-2 text-primary"></i>
               </div>
               <ul className="dropdown-menu end-0" style={{ left: "auto" }}>
                 <li>
@@ -85,7 +85,7 @@ export default function Navbar() {
                 <li>
                   <div className="dropdown-item">
                     <button onClick={handleLogout} className="btn btn-primary w-100">
-                      Logout
+                      <i className="bi bi-box-arrow-in-left"></i> Logout
                     </button>
                   </div>
                 </li>
