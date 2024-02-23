@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import Navbar from "@/components/navbar";
+import PokemonCard from "@/components/pokemon-card";
 
 export default function PokemonList() {
   const [searchTermUi, setSearchTermUi] = useState("");
@@ -96,11 +97,7 @@ export default function PokemonList() {
             {data &&
               data.map((pokemonPage) =>
                 pokemonPage.results.map((pokemon) => (
-                  <Link href={"/pokemons/" + pokemon.name} className="p-1" key={pokemon.name}>
-                    <div className="card p-3">
-                      <h2 className="text-center">{pokemon.name}</h2>
-                    </div>
-                  </Link>
+                  <PokemonCard key={pokemon.name} pokemon={pokemon} />
                 ))
               )}
           </div>
